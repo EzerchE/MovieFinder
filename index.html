@@ -38,7 +38,7 @@
             <button data-region="TR" role="option">🇹🇷 Türkiye</button><button data-region="US" role="option">🇺🇸 Amerika</button><button data-region="GB" role="option">🇬🇧 Birleşik Krallık</button><button data-region="DE" role="option">🇩🇪 Almanya</button>
           </div>
         </div>
-        <button class="avatar" type="button" aria-label="Profil">EZ</button>
+        <button class="avatar" id="profileButton" type="button" aria-label="Profil ve tercihler">EZ</button>
       </div>
     </header>
     <main>
@@ -52,15 +52,15 @@
         <div class="detail-backdrop" id="detailBackdrop"></div><div class="detail-gradient"></div>
         <div class="poster-column"><img id="poster" src="/posters/lanterns.jpg" alt="Lanterns posteri" /><span class="match-badge" id="matchBadge">%96 eşleşme</span></div>
         <div class="content-column">
-          <div class="title-row"><div><div class="meta" id="meta">DİZİ <span>•</span> 2026 <span>•</span> 1 SEZON <span>•</span> 18+</div><h2 id="title">Lanterns</h2></div><button class="more-button" type="button" aria-label="Diğer seçenekler">•••</button></div>
+          <div class="title-row"><div><div class="meta" id="meta">DİZİ <span>•</span> 2026 <span>•</span> 1 SEZON <span>•</span> 18+</div><h2 id="title">Lanterns</h2></div><div class="more-wrap"><button class="more-button" id="moreButton" type="button" aria-label="Diğer seçenekler" aria-haspopup="menu" aria-expanded="false">•••</button><div class="more-menu" id="moreMenu" role="menu" hidden><button id="shareAction" role="menuitem" type="button"><span>↗</span> Paylaş</button><button id="moreSaveAction" role="menuitem" type="button"><span>＋</span> Listeme ekle</button><button id="moreWatchedAction" role="menuitem" type="button"><span>✓</span> İzledim</button><a id="sourceAction" role="menuitem" href="#" target="_blank" rel="noopener"><span>⌁</span> Kaynakta aç</a></div></div></div>
           <p class="tagline" id="tagline">Kozmik bir suç. Dünyaya ait karanlık bir sır.</p>
           <p class="summary" id="summary">Yeni üye John Stewart ve efsanevi Lantern Hal Jordan, Amerika'nın kalbinde işlenen bir cinayeti araştırırken kendilerini hem dünyayı hem de birliklerini sarsacak bir komplonun içinde bulur.</p>
           <div class="genres" id="genres"></div>
-          <div class="rating-row"><div class="rating-card imdb"><span class="rating-source">IMDb</span><strong id="imdbRating">—</strong><small>Yeni dizi</small></div><div class="rating-card tomato"><span class="tomato-icon">●</span><strong id="rtCritic">94%</strong><small>Eleştirmen</small></div><div class="rating-card popcorn"><span class="popcorn-icon">✦</span><strong id="rtAudience">83%</strong><small>İzleyici</small></div></div>
+          <div class="rating-row"><div class="rating-card imdb"><span class="rating-source">IMDb</span><strong id="imdbRating">Veri yok</strong><small>Kaynak bağlı değil</small></div><div class="rating-card tomato"><span class="tomato-icon">●</span><strong id="rtCritic">Veri yok</strong><small>Eleştirmen</small></div><div class="rating-card popcorn"><span class="popcorn-icon">✦</span><strong id="rtAudience">Veri yok</strong><small>İzleyici</small></div></div>
           <div class="content-actions"><button id="watchedButton" class="primary-action" type="button"><span>✓</span> İzledim</button><button id="saveButton" class="secondary-action" type="button"><span>＋</span> Listeme ekle</button><a id="trailerButton" class="icon-action" href="https://www.youtube.com/watch?v=XmcIjxwLJcY" target="_blank" rel="noopener" aria-label="Fragmanı aç">▶</a></div>
         </div>
         <aside class="availability-column">
-          <div class="availability-head"><div><span class="live-dot"></span><p id="availabilityTitle">Türkiye'de izlenebilir</p><small id="availabilityUpdated">Bugün güncellendi</small></div><button class="alert-button" id="alertButton" type="button" aria-label="Fiyat alarmı kur">♢</button></div>
+          <div class="availability-head"><div><span class="live-dot"></span><p id="availabilityTitle">Türkiye'de izlenebilir</p><small id="availabilityUpdated">Bugün güncellendi</small></div><button class="alert-button" id="alertButton" type="button" aria-label="Yayın seçeneklerini takip et" title="Bu içeriği yerel takip listene ekle">☆</button></div>
           <div id="offers" class="offers"></div><div class="best-note" id="bestNote"><span>↘</span><p><strong id="bestLabel">En uygun seçenek</strong><br /><small id="bestText">HBO Max Standart ile doğrudan izle</small></p></div><p class="data-note" id="dataNote">Platform verileri JustWatch/TMDB bağlantısı için hazırlanmış ürün önizlemesidir.</p>
         </aside>
       </section>
@@ -71,6 +71,15 @@
       </section>
       <footer class="credits"><p>Seyir'in geniş kataloğu TMDB kaynaklı proje verisini, çevrimiçi yedek arama ise Wikidata'yı kullanır.</p><p>Bu ürün TMDB API'sini kullanmak üzere tasarlanmıştır ancak TMDB tarafından onaylanmış veya sertifikalandırılmış değildir. Yayın sağlayıcı verileri kullanıldığında JustWatch atfı gerekir.</p></footer>
     </main>
+    <div class="modal-overlay" id="panelOverlay" hidden>
+      <section class="app-panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle">
+        <button class="modal-close" id="panelClose" type="button" aria-label="Pencereyi kapat">×</button>
+        <p class="eyebrow" id="panelEyebrow">KİŞİSEL ALANIN</p>
+        <h3 id="panelTitle">Listem</h3>
+        <p class="panel-subtitle" id="panelSubtitle"></p>
+        <div id="panelContent"></div>
+      </section>
+    </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script type="module" src="/app.js"></script>
   </body>
