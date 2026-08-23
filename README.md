@@ -1,5 +1,7 @@
 # Seyir
 
+**Canlı demo:** https://ezerche.github.io/MovieFinder/
+
 Seyir; film ve dizilerin seçilen ülke/bölgede hangi platformlarda izlenebildiğini,
 puanlarını ve en uygun izleme seçeneğini tek ekranda göstermeyi hedefleyen bir
 keşif ürünüdür.
@@ -26,6 +28,16 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## GitHub Pages
+
+Proje Vite ile statik olarak derlenir ve `master` dalına yapılan her push'ta
+`.github/workflows/deploy-pages.yml` üzerinden GitHub Pages'e gönderilir.
+Repository Pages ayarlarında yayın kaynağı olarak **GitHub Actions** seçilmelidir.
+
+GitHub Pages yalnızca statik dosya barındırır. TMDB anahtarları, Trakt OAuth
+secret'ı ve diğer özel anahtarlar bu uygulamanın tarayıcı koduna eklenmemelidir.
+Canlı entegrasyonlar için ayrı bir API/worker katmanı kullanılmalıdır.
 
 ## Canlı veri katmanı
 
