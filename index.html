@@ -38,7 +38,6 @@
             <button data-region="TR" role="option">🇹🇷 Türkiye</button><button data-region="US" role="option">🇺🇸 Amerika</button><button data-region="GB" role="option">🇬🇧 Birleşik Krallık</button><button data-region="DE" role="option">🇩🇪 Almanya</button>
           </div>
         </div>
-        <button class="trakt-button" id="traktButton" type="button"><span class="trakt-dot"></span> Trakt'ı bağla</button>
         <button class="avatar" type="button" aria-label="Profil">EZ</button>
       </div>
     </header>
@@ -71,9 +70,6 @@
       </section>
     </main>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <div class="modal-overlay" id="traktModal" hidden>
-      <div class="connection-modal" role="dialog" aria-modal="true" aria-labelledby="traktTitle"><button class="modal-close" id="modalClose" type="button" aria-label="Kapat">×</button><span class="connection-logo"><i></i></span><p class="eyebrow">KİŞİSELLEŞTİR</p><h3 id="traktTitle">Trakt geçmişini Seyir'e bağla</h3><p id="traktDescription">İzlediklerin önerilerden otomatik çıkarılır, yeni izlediklerin tek dokunuşla Trakt'a işlenir.</p><ul id="traktBenefits"><li>İzleme geçmişini eşitle</li><li>Listelerini içe aktar</li><li>Tekrar önerileri gizle</li></ul><div class="connection-status" id="traktStatus" role="status" hidden></div><button class="primary-action wide" id="traktConnectButton" type="button">Trakt ile devam et</button><button class="secondary-action wide disconnect-action" id="traktDisconnectButton" type="button" hidden>Bağlantıyı kaldır</button><small id="traktHelp">Trakt'ın güvenli giriş ekranına yönlendirileceksiniz.</small></div>
-    </div>
     <script type="module" src="/app.js"></script>
   </body>
 </html>
