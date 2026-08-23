@@ -1,33 +1,52 @@
-# Movie Finder
-A web application that makes it easy to discover movies similar to others. 
-It displays films on a grid, positioning them closer together or further apart based on how similar they are to each other.
+# Seyir
 
-## Demo
-You can try the app with a dataset of 10k movies [here](https://remihiya.github.io/MovieFinder/).
+Seyir; film ve dizilerin seçilen ülke/bölgede hangi platformlarda izlenebildiğini,
+puanlarını ve en uygun izleme seçeneğini tek ekranda göstermeyi hedefleyen bir
+keşif ürünüdür.
 
-## Usage
-To generate your own data, you need to supply 2 values in `constants.py` : 
-- Your [TMDB API key](https://themoviedb.org/login) 
-- The grid size you want.
+İlk ürün diliminde şunlar çalışır:
 
-Generating a dataset is a 3 step process :
-- `movie_list.py` creates a list of GRID_SIZE² movies.
-- `movie_details.py` adds details for every movie found.
-- `movie_grid.py` generates a grid based on the movie details.
+- Film/dizi arama ve örnek içerikler arasında geçiş
+- Türkiye, ABD, Birleşik Krallık ve Almanya bölge seçimi
+- Abonelik seçenekleri ile platform fiyat karşılaştırma yüzeyi
+- IMDb, Rotten Tomatoes eleştirmen ve izleyici puan alanları
+- İzledim ve listeme ekle durumlarının cihazda saklanması
+- Duygu etiketleriyle benzer içerik önerileri
+- Trakt OAuth bağlantısı için hazırlanmış kullanıcı akışı
 
-Run the 3 scripts in order and 4 json files should be generated in the data folder :
-- `movies.json` a simple list of movies ids.
-- `movie_details.json` a dictionnary associating a movie to its details.
-- `movie_grid.json` the coordinates on a grid calculated for each movie.
-- `movie_grid_adult.json` the same as the previous one but the grid also contains adult movies.
+## Yerel geliştirme
 
-You can then simply open `index.html` in your favorite browser to display **the movie sorting grid**.
-> Note : The browser can sometimes block the read access to the different json files. Simply open `index.html` in a small server.
-> (ex: run `python3 -m http.server 8000` in the project folder, then open the web app.)
+```bash
+npm install
+npm run dev
+```
 
+Üretim derlemesi:
 
-## Credits
-This product uses the TMDB API but is not endorsed or certified by [TMDB](https://www.themoviedb.org/).
+```bash
+npm run build
+```
 
-<img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_1-8ba2ac31f354005783fab473602c34c3f4fd207150182061e425d366e4f34596.svg" 
-  alt="TMDB Logo" width="200"/>
+## Canlı veri katmanı
+
+Mevcut ekran çalışan bir ürün önizlemesidir. Canlı sürümde planlanan veri akışı:
+
+- TMDB: arama, içerik ayrıntıları, bölgesel watch provider verisi
+- JustWatch partner verisi: varsa kiralama/satın alma fiyatları ve derin bağlantılar
+- IMDb lisanslı veri veya OMDb: IMDb puanı
+- Lisanslı Rotten Tomatoes/OMDb verisi: eleştirmen ve izleyici puanları
+- Trakt OAuth: geçmiş, watchlist ve izlendi işaretleri
+- Ayrı ve kaynak tarihi tutulan platform paket fiyatı kataloğu
+
+Gerekli anahtar isimleri `.env.example` içinde yer alır. Anahtarlar istemci
+tarafına konulmamalı; sunucu/worker katmanında tutulmalıdır.
+
+## Önceki benzerlik haritası
+
+Depodaki ilk MovieFinder deneyimi `legacy.html`, `script.js`, `style.css` ve
+`data/` altında korunmuştur. Python veri üretim dosyaları da ileride “Duygu
+Haritası” görünümüne dönüştürülmek üzere yerinde bırakılmıştır.
+
+Bu ürün TMDB API'sini kullanmak üzere tasarlanmıştır ancak TMDB tarafından
+onaylanmış veya sertifikalandırılmış değildir. TMDB üzerinden sunulan izleme
+sağlayıcısı verileri kullanıldığında JustWatch atfı zorunludur.

@@ -1,115 +1,74 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The movie sorting grid</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<div id="search-container">
-    <input type="text" id="search-bar" placeholder="Find a movie..." autocomplete="off">
-    <button id="clear-search-btn" title="Clear search bar">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-    <button id="filter-toggle-btn" title="Advanced filters">
-        <i class="fa-solid fa-sliders"></i>
-    </button>
-    <button id="random-btn" title="Film aléatoire">
-        <i class="fa-solid fa-dice"></i>
-    </button>
-</div>
-
-<div id="filter-sidebar" class="sidebar">
-    <div class="sidebar-header">
-        <h3>Filters</h3>
-        <span id="sidebar-close-btn">&times;</span>
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07110e" />
+    <meta name="description" content="Film ve dizilerin ülkenizde hangi platformda yayınlandığını, puanlarını ve size en uygun izleme seçeneğini bulun." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:title" content="Seyir — Ne izleyeceğini değil, nerede izleyeceğini bul." />
+    <meta property="og:description" content="Film ve dizilerin ülkenizde hangi platformda olduğunu, puanlarını ve en uygun izleme seçeneğini bulun." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Seyir — Ne izleyeceğini değil, nerede izleyeceğini bul." />
+    <meta name="twitter:description" content="Film ve dizilerin ülkenizde hangi platformda olduğunu, puanlarını ve en uygun izleme seçeneğini bulun." />
+    <title>Seyir — Ne izleyeceğini değil, nerede izleyeceğini bul.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Seyir ana sayfa"><span class="brand-mark"><i></i><i></i><i></i></span><span>seyir</span></a>
+      <nav aria-label="Ana menü">
+        <a class="active" href="#kesfet">Keşfet</a><a href="#oneriler">Sana özel</a>
+        <button class="nav-button" id="watchlistNav" type="button">Listem <span id="watchlistCount">0</span></button>
+      </nav>
+      <div class="top-actions">
+        <div class="region-picker">
+          <button id="regionButton" class="region-button" type="button" aria-haspopup="listbox" aria-expanded="false"><span id="regionFlag">🇹🇷</span><span id="regionName">Türkiye</span><span class="chevron">⌄</span></button>
+          <div id="regionMenu" class="region-menu" role="listbox" hidden>
+            <button data-region="TR" role="option">🇹🇷 Türkiye</button><button data-region="US" role="option">🇺🇸 Amerika</button><button data-region="GB" role="option">🇬🇧 Birleşik Krallık</button><button data-region="DE" role="option">🇩🇪 Almanya</button>
+          </div>
+        </div>
+        <button class="trakt-button" id="traktButton" type="button"><span class="trakt-dot"></span> Trakt'ı bağla</button>
+        <button class="avatar" type="button" aria-label="Profil">EZ</button>
+      </div>
+    </header>
+    <main>
+      <section class="search-shell" id="kesfet">
+        <p class="eyebrow">TÜM PLATFORMLAR. TEK ARAMA.</p><h1>Ne izlemek istiyorsun?</h1>
+        <div class="search-wrap"><span class="search-icon" aria-hidden="true"></span><input id="searchInput" type="search" value="Lanterns" placeholder="Film, dizi veya oyuncu ara..." autocomplete="off" aria-label="Film veya dizi ara" /><kbd>⌘ K</kbd><div id="searchResults" class="search-results" hidden></div></div>
+        <div class="quick-tags" aria-label="Hızlı filtreler"><button type="button" data-query="Lanterns">Yeni çıkanlar</button><button type="button" data-query="The Batman">Suç & gizem</button><button type="button" data-query="Blade Runner 2049">Bilim kurgu</button><button type="button" data-query="Arrival">Düşündüren</button></div>
+      </section>
+      <section class="detail-card" aria-live="polite">
+        <div class="detail-backdrop" id="detailBackdrop"></div><div class="detail-gradient"></div>
+        <div class="poster-column"><img id="poster" src="/posters/lanterns.jpg" alt="Lanterns posteri" /><span class="match-badge" id="matchBadge">%96 eşleşme</span></div>
+        <div class="content-column">
+          <div class="title-row"><div><div class="meta" id="meta">DİZİ <span>•</span> 2026 <span>•</span> 1 SEZON <span>•</span> 18+</div><h2 id="title">Lanterns</h2></div><button class="more-button" type="button" aria-label="Diğer seçenekler">•••</button></div>
+          <p class="tagline" id="tagline">Kozmik bir suç. Dünyaya ait karanlık bir sır.</p>
+          <p class="summary" id="summary">Yeni üye John Stewart ve efsanevi Lantern Hal Jordan, Amerika'nın kalbinde işlenen bir cinayeti araştırırken kendilerini hem dünyayı hem de birliklerini sarsacak bir komplonun içinde bulur.</p>
+          <div class="genres" id="genres"></div>
+          <div class="rating-row"><div class="rating-card imdb"><span class="rating-source">IMDb</span><strong id="imdbRating">—</strong><small>Yeni dizi</small></div><div class="rating-card tomato"><span class="tomato-icon">●</span><strong id="rtCritic">94%</strong><small>Eleştirmen</small></div><div class="rating-card popcorn"><span class="popcorn-icon">✦</span><strong id="rtAudience">83%</strong><small>İzleyici</small></div></div>
+          <div class="content-actions"><button id="watchedButton" class="primary-action" type="button"><span>✓</span> İzledim</button><button id="saveButton" class="secondary-action" type="button"><span>＋</span> Listeme ekle</button><a id="trailerButton" class="icon-action" href="https://www.youtube.com/watch?v=XmcIjxwLJcY" target="_blank" rel="noopener" aria-label="Fragmanı aç">▶</a></div>
+        </div>
+        <aside class="availability-column">
+          <div class="availability-head"><div><span class="live-dot"></span><p id="availabilityTitle">Türkiye'de izlenebilir</p><small id="availabilityUpdated">Bugün güncellendi</small></div><button class="alert-button" id="alertButton" type="button" aria-label="Fiyat alarmı kur">♢</button></div>
+          <div id="offers" class="offers"></div><div class="best-note"><span>↘</span><p><strong id="bestLabel">En uygun seçenek</strong><br /><small id="bestText">HBO Max Standart ile doğrudan izle</small></p></div><p class="data-note">Platform verileri JustWatch/TMDB bağlantısı için hazırlanmış ürün önizlemesidir.</p>
+        </aside>
+      </section>
+      <section class="recommendations" id="oneriler">
+        <div class="section-heading"><div><p class="eyebrow">AYNI HİS, YENİ HİKÂYELER</p><h3>Lanterns hoşuna gittiyse</h3></div><button id="moodButton" type="button">Duyguyu ayarla <span>☷</span></button></div>
+        <div class="mood-bar" id="moodBar" hidden><span>Bu akşam:</span><button class="active" data-mood="dark">Karanlık</button><button data-mood="thoughtful">Düşündüren</button><button data-mood="tense">Gerilimli</button><button data-mood="epic">Epik</button></div>
+        <div class="recommendation-grid" id="recommendationGrid"></div>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="modal-overlay" id="traktModal" hidden>
+      <div class="connection-modal" role="dialog" aria-modal="true" aria-labelledby="traktTitle"><button class="modal-close" id="modalClose" type="button" aria-label="Kapat">×</button><span class="connection-logo"><i></i></span><p class="eyebrow">KİŞİSELLEŞTİR</p><h3 id="traktTitle">Trakt geçmişini Seyir'e bağla</h3><p>İzlediklerin önerilerden otomatik çıkarılır, yeni izlediklerin tek dokunuşla Trakt'a işlenir.</p><ul><li>İzleme geçmişini eşitle</li><li>Listelerini içe aktar</li><li>Tekrar önerileri gizle</li></ul><button class="primary-action wide" id="traktConnectDemo" type="button">Trakt ile devam et</button><small>OAuth bağlantısı için Trakt uygulama anahtarları eklenecek.</small></div>
     </div>
-    <div class="sidebar-content">
-        <div class="filter-section">
-            <h4>Genres</h4>
-            <div id="genres-container" class="genres-grid">
-            </div>
-        </div>
-
-        <div class="filter-section">
-            <h4>Options</h4>
-            <label class="toggle-control">
-                <input type="checkbox" id="adult-toggle">
-                <span class="control-indicator"></span>
-                Adult content
-            </label>
-        </div>
-
-        <div class="filter-section">
-            <h4>Release year : <span id="year-range-label"></span></h4>
-            <div class="range-slider-wrapper">
-                <input type="range" id="year-min" class="slider-min">
-                <input type="range" id="year-max" class="slider-max">
-            </div>
-        </div>
-
-        <div class="filter-section">
-            <h4>Duration : <span id="runtime-range-label"></span></h4>
-            <div class="range-slider-wrapper">
-                <input type="range" id="runtime-min" class="slider-min">
-                <input type="range" id="runtime-max" class="slider-max">
-            </div>
-        </div>
-
-        <button id="reset-filters-btn">Reset filters</button>
-    </div>
-</div>
-
-<div id="center-target"></div>
-
-<div id="viewport">
-    <div id="grid-container"></div>
-</div>
-
-<div id="movie-modal" class="modal">
-    <div class="modal-poster-placeholder"></div>
-
-    <div class="modal-info-wrapper">
-        <div class="modal-info-panel">
-            <span class="close-btn">&times;</span>
-            <h2 id="modal-title"></h2>
-
-            <div class="modal-meta">
-                <span id="modal-date"></span>
-                <span class="separator">•</span>
-                <span id="modal-duration"></span>
-            </div>
-
-            <div id="modal-genres"></div>
-            <p id="modal-overview"></p>
-
-            <a id="modal-trailer" href="#" class="trailer-btn">
-                <i class="fa-solid fa-play"></i>
-                Trailer
-            </a>
-        </div>
-    </div>
-</div>
-
-<div id="video-modal">
-    <div class="video-modal-content">
-        <span class="video-close-btn">&times;</span>
-        <iframe id="youtube-iframe" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-</div>
-
-<div id="external-links">
-    <a href="https://github.com/RemiHiya/MovieFinder" target="_blank" rel="noopener noreferrer" title="GitHub repo">
-        <i class="fa-brands fa-github"></i>
-    </a>
-    <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer" title="Powered by TMDB">
-        <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg" alt="TMDB logo">
-    </a>
-</div>
-
-<script src="script.js"></script>
-</body>
+    <script type="module" src="/app.js"></script>
+  </body>
 </html>
