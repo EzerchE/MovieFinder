@@ -1,0 +1,10 @@
+name = "seyir-trakt-oauth"
+main = "trakt-oauth.js"
+compatibility_date = "2026-08-23"
+
+[vars]
+ALLOWED_ORIGINS = "https://ezerche.github.io,http://localhost:5173"
+TRAKT_REDIRECT_URIS = "https://ezerche.github.io/MovieFinder/,http://localhost:5173/MovieFinder/"
+
+# TRAKT_CLIENT_ID ve TRAKT_CLIENT_SECRET değerlerini düz metin olarak buraya
+# yazmayın. `wrangler secret put` ile Worker secret olarak ekleyin.

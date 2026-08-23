@@ -14,7 +14,7 @@ keşif ürünüdür.
 - IMDb, Rotten Tomatoes eleştirmen ve izleyici puan alanları
 - İzledim ve listeme ekle durumlarının cihazda saklanması
 - Duygu etiketleriyle benzer içerik önerileri
-- Trakt OAuth bağlantısı için hazırlanmış kullanıcı akışı
+- Trakt OAuth bağlantısı, geçmiş ve watchlist eşitleme istemcisi
 
 ## Yerel geliştirme
 
@@ -37,7 +37,30 @@ Repository Pages ayarlarında yayın kaynağı olarak **GitHub Actions** seçilm
 
 GitHub Pages yalnızca statik dosya barındırır. TMDB anahtarları, Trakt OAuth
 secret'ı ve diğer özel anahtarlar bu uygulamanın tarayıcı koduna eklenmemelidir.
-Canlı entegrasyonlar için ayrı bir API/worker katmanı kullanılmalıdır.
+Trakt token değişimi için `worker/` altında ayrı ve CORS kısıtlı bir Worker
+uygulaması bulunur.
+
+## Trakt bağlantısını etkinleştirme
+
+1. Trakt'ta bir API uygulaması oluşturun.
+2. Uygulamanın redirect URI alanına tam olarak
+   `https://ezerche.github.io/MovieFinder/` değerini ekleyin.
+3. `worker/wrangler.toml.example` dosyasını `worker/wrangler.toml` olarak
+   kopyalayın ve Worker'ı Cloudflare'a dağıtın.
+4. Worker üzerinde `TRAKT_CLIENT_ID` ve `TRAKT_CLIENT_SECRET` değerlerini secret
+   olarak tanımlayın. Secret değerlerini depoya veya Vite ortamına koymayın.
+5. GitHub repository **Settings → Secrets and variables → Actions → Variables**
+   bölümüne şu değişkenleri ekleyin:
+
+   - `TRAKT_CLIENT_ID`: Trakt uygulamasının herkese açık Client ID değeri
+   - `TRAKT_AUTH_URL`: dağıtılan Worker adresi; örneğin
+     `https://seyir-trakt-oauth.<hesap>.workers.dev`
+
+6. GitHub Pages workflow'unu yeniden çalıştırın.
+
+Bağlantı tamamlandığında erişim ve yenileme belirteçleri yalnızca kullanıcının
+tarayıcısında saklanır. Worker, Trakt `client_secret` değerini tarayıcıya
+göndermeden authorization code ve refresh token değişimini gerçekleştirir.
 
 ## Canlı veri katmanı
 
@@ -47,7 +70,8 @@ Mevcut ekran çalışan bir ürün önizlemesidir. Canlı sürümde planlanan ve
 - JustWatch partner verisi: varsa kiralama/satın alma fiyatları ve derin bağlantılar
 - IMDb lisanslı veri veya OMDb: IMDb puanı
 - Lisanslı Rotten Tomatoes/OMDb verisi: eleştirmen ve izleyici puanları
-- Trakt OAuth: geçmiş, watchlist ve izlendi işaretleri
+- Trakt OAuth: geçmiş ve watchlist içe aktarma; IMDb kimliği bulunan filmlerde
+  izlendi ve film/dizi watchlist durumunu Trakt'a yazma
 - Ayrı ve kaynak tarihi tutulan platform paket fiyatı kataloğu
 
 Gerekli anahtar isimleri `.env.example` içinde yer alır. Anahtarlar istemci
