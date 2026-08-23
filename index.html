@@ -45,7 +45,8 @@
       <section class="search-shell" id="kesfet">
         <p class="eyebrow">TÜM PLATFORMLAR. TEK ARAMA.</p><h1>Ne izlemek istiyorsun?</h1>
         <div class="search-wrap"><span class="search-icon" aria-hidden="true"></span><input id="searchInput" type="search" value="Lanterns" placeholder="Film, dizi veya oyuncu ara..." autocomplete="off" aria-label="Film veya dizi ara" /><kbd>⌘ K</kbd><div id="searchResults" class="search-results" hidden></div></div>
-        <div class="quick-tags" aria-label="Hızlı filtreler"><button type="button" data-query="Lanterns">Yeni çıkanlar</button><button type="button" data-query="The Batman">Suç & gizem</button><button type="button" data-query="Blade Runner 2049">Bilim kurgu</button><button type="button" data-query="Arrival">Düşündüren</button></div>
+        <div class="quick-tags" aria-label="Hızlı filtreler"><button type="button" data-query="Dune">Yeni çıkanlar</button><button type="button" data-query="The Batman">Suç & gizem</button><button type="button" data-query="Blade Runner">Bilim kurgu</button><button type="button" data-query="Arrival">Düşündüren</button></div>
+        <p class="catalog-status" id="catalogStatus" role="status">Film kataloğu hazırlanıyor…</p>
       </section>
       <section class="detail-card" aria-live="polite">
         <div class="detail-backdrop" id="detailBackdrop"></div><div class="detail-gradient"></div>
@@ -60,7 +61,7 @@
         </div>
         <aside class="availability-column">
           <div class="availability-head"><div><span class="live-dot"></span><p id="availabilityTitle">Türkiye'de izlenebilir</p><small id="availabilityUpdated">Bugün güncellendi</small></div><button class="alert-button" id="alertButton" type="button" aria-label="Fiyat alarmı kur">♢</button></div>
-          <div id="offers" class="offers"></div><div class="best-note"><span>↘</span><p><strong id="bestLabel">En uygun seçenek</strong><br /><small id="bestText">HBO Max Standart ile doğrudan izle</small></p></div><p class="data-note">Platform verileri JustWatch/TMDB bağlantısı için hazırlanmış ürün önizlemesidir.</p>
+          <div id="offers" class="offers"></div><div class="best-note" id="bestNote"><span>↘</span><p><strong id="bestLabel">En uygun seçenek</strong><br /><small id="bestText">HBO Max Standart ile doğrudan izle</small></p></div><p class="data-note" id="dataNote">Platform verileri JustWatch/TMDB bağlantısı için hazırlanmış ürün önizlemesidir.</p>
         </aside>
       </section>
       <section class="recommendations" id="oneriler">
@@ -68,6 +69,7 @@
         <div class="mood-bar" id="moodBar" hidden><span>Bu akşam:</span><button class="active" data-mood="dark">Karanlık</button><button data-mood="thoughtful">Düşündüren</button><button data-mood="tense">Gerilimli</button><button data-mood="epic">Epik</button></div>
         <div class="recommendation-grid" id="recommendationGrid"></div>
       </section>
+      <footer class="credits"><p>Seyir'in geniş kataloğu TMDB kaynaklı proje verisini, çevrimiçi yedek arama ise Wikidata'yı kullanır.</p><p>Bu ürün TMDB API'sini kullanmak üzere tasarlanmıştır ancak TMDB tarafından onaylanmış veya sertifikalandırılmış değildir. Yayın sağlayıcı verileri kullanıldığında JustWatch atfı gerekir.</p></footer>
     </main>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script type="module" src="/app.js"></script>

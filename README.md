@@ -6,15 +6,15 @@ Seyir; film ve dizilerin seçilen ülke/bölgede hangi platformlarda izlenebildi
 puanlarını ve en uygun izleme seçeneğini tek ekranda göstermeyi hedefleyen bir
 keşif ürünüdür.
 
-İlk ürün diliminde şunlar çalışır:
+Şu anda çalışan özellikler:
 
-- Film/dizi arama ve örnek içerikler arasında geçiş
+- Depodaki TMDB kaynaklı veriden derlenen yaklaşık 10.000 filmlik hızlı katalog
+- Yerel katalogda bulunmayan film ve diziler için anahtarsız Wikidata araması
 - Türkiye, ABD, Birleşik Krallık ve Almanya bölge seçimi
-- Abonelik seçenekleri ile platform fiyat karşılaştırma yüzeyi
-- IMDb, Rotten Tomatoes eleştirmen ve izleyici puan alanları
+- Seçilen içerik ve ülke için TMDB yayın seçenekleri sayfasına yönlendirme
 - İzledim ve listeme ekle durumlarının cihazda saklanması
-- Duygu etiketleriyle benzer içerik önerileri
-- İzledim ve Listem verilerine göre önerileri cihaz üzerinde kişiselleştirme
+- Türler, anahtar kelimeler, seçilen duygu ve Listem verisinden puanlanan öneriler
+- İzlenen içeriklerin sonraki önerilerden çıkarılması
 
 ## Yerel geliştirme
 
@@ -28,6 +28,10 @@ npm run dev
 ```bash
 npm run build
 ```
+
+Derleme öncesinde `scripts/build-catalog.mjs`, `data/movie_details.json`
+dosyasını tarayıcı için küçültülmüş `public/data/catalog.json` çıktısına çevirir.
+Bu çıktı üretilen dosyadır ve Git'e eklenmez.
 
 ## GitHub Pages
 
@@ -44,9 +48,10 @@ Trakt API uygulaması oluşturmak VIP üyeliği gerektirdiği için Trakt bağla
 `İzledim`, `Listem` ve duygu seçimleriyle kişiselleştirilir; izlendi olarak
 işaretlenen içerikler sonraki önerilerden çıkarılır.
 
-## Canlı veri katmanı
+## Veri katmanı
 
-Mevcut ekran çalışan bir ürün önizlemesidir. Canlı sürümde planlanan veri akışı:
+Arama ve öneriler anahtar veya ücret gerektirmeden çalışır. Puanların ve platform
+kartlarının otomatik güncellenmesi için planlanan sonraki veri akışı:
 
 - TMDB: arama, içerik ayrıntıları, bölgesel watch provider verisi
 - JustWatch partner verisi: varsa kiralama/satın alma fiyatları ve derin bağlantılar
